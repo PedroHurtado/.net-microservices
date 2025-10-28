@@ -1,20 +1,20 @@
 namespace webapi.common.infrastructure;
-
-interface IAdd<T>
+public interface IAdd<in T>
 {
-    Task Add(T entity);
-}
-interface IGet<T, ID>
-{
-    Task<T> Get(ID id);
+    Task AddAsync(T entity, CancellationToken cancellationToken = default);
 }
 
-interface IUpdate<T, ID> : IGet<T, ID>
+public interface IGet<T, in TId>
 {
-    Task Update(T entity);
+    Task<T?> GetAsync(TId id, CancellationToken cancellationToken = default);
 }
 
-interface IRemove<T, ID>:IGet<T,ID>
+public interface IUpdate<in T, in TId> : IGet<T, TId>
 {
-    Task Update(T entity);
+    Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
+}
+
+public interface IRemove<T, in TId> : IGet<T, TId>
+{
+    Task RemoveAsync(TId id, CancellationToken cancellationToken = default);
 }
