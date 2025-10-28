@@ -250,7 +250,7 @@ public class PizzaValidator : AbstractValidator<(string Name, string Description
 }
 
 // Excepciones de dominio
-public class PizzaDomainException(string message) : Exception(message)
+public class PizzaDomainException(string message) : DomainException(message)
 {
 }
 
