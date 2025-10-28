@@ -5,7 +5,15 @@ namespace webapi.common.domain;
 
 public record Email(string Value)
 {
-    
+   public string Value { get; } = ValidateEmail(Value);
+
+    private static string ValidateEmail(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            throw new ArgumentException("Email no puede ser nulo o vacío", nameof(value));
+        
+        return value;
+    }
 }
 
 /*public class Email : ValueObject
