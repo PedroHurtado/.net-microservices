@@ -1,4 +1,4 @@
-namespace webpai.common.dependencyinjection;
+namespace webapi.common.dependencyinjection;
 
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;

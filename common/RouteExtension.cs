@@ -1,4 +1,4 @@
-namespace webpai.common;
+namespace webapi.common;
 public static class RouteExtension
 {
     public static void MapFeatures(this IEndpointRouteBuilder builder)

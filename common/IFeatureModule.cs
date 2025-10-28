@@ -1,4 +1,4 @@
-namespace webpai.common;
+namespace webapi.common;
 
 public interface  IFeatureModule
 {

@@ -1,4 +1,4 @@
-namespace webpai.common.dependencyinjection;
+namespace webapi.common.dependencyinjection;
 
 public enum ServiceLifetime
 {
