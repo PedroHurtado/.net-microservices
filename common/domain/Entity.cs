@@ -4,11 +4,10 @@ public abstract class Entity(Guid id)
     public Guid Id { get; init; } = id;
     public override bool Equals(object? obj)
     {
-        if (obj is Entity e)
-        {
-            return e.Id == Id;
-        }
-        return false;
+        if (obj is not Entity other || GetType() != obj.GetType())
+            return false;
+            
+        return Id == other.Id;
     }
 
     public override int GetHashCode()
