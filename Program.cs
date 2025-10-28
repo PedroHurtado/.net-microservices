@@ -1,5 +1,6 @@
-using webpai.common;
-using webpai.common.dependencyinjection;
+using webapi.common.dependencyinjection;
+using webapi.common;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInjectables();
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 var app = builder.Build();
 

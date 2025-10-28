@@ -9,9 +9,8 @@ public record Email(string Value)
 
     private static string ValidateEmail(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("Email no puede ser nulo o vacío", nameof(value));
-        
+        ArgumentNullException.ThrowIfNullOrEmpty(value);
+                        
         return value;
     }
 }
