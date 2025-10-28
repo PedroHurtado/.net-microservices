@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using webapi.common.domain;
 
 namespace webapi.features.pizza.domain;
@@ -17,6 +18,7 @@ public class Ingredient : Entity
 
     public void Update(string name, decimal cost)
     {
+        //Eventos del dominio
         IngredientValidator.ValidateIngredientData(name, cost);
         
         Name = name;
@@ -25,7 +27,9 @@ public class Ingredient : Entity
 
     public static Ingredient Create(Guid id, string name, decimal cost)
     {
-        return new Ingredient(id, name, cost);
+        var ingredient = new Ingredient(id, name, cost);
+        //Eventos del dominio
+        return ingredient;
     }
 }
 

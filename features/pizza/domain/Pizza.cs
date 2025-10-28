@@ -45,7 +45,7 @@ public class Pizza : Entity
     public void Update(string name, string description, string url)
     {
         PizzaValidator.ValidatePizzaData(name, description, url);
-        
+        //pizza:update
         Name = name;
         Description = description;
         Url = url;
@@ -53,7 +53,9 @@ public class Pizza : Entity
 
     public static Pizza Create(Guid id, string name, string description, string url)
     {
-        return new Pizza(id, name, description, url);
+        var pizza = new Pizza(id, name, description, url);
+        //create pizza:create
+        return pizza;
     }
 }
 

@@ -1,5 +1,26 @@
+using System.Runtime.CompilerServices;
+
 namespace webapi.common.domain;
 
+
+public record Email(string Value)
+{
+    
+}
+
+/*public class Email : ValueObject
+{
+    public string Value { get; init; }
+    public Email(string value)
+    {
+        Value = value;
+    }
+
+    protected override IEnumerable<object?> GetEqualityComponents()
+    {
+        yield return Value;
+    }
+}*/
 public abstract class ValueObject
 {
     protected abstract IEnumerable<object?> GetEqualityComponents();
