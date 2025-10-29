@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using webapi.common;
 using webapi.common.dependencyinjection;
 using System.ComponentModel.DataAnnotations;
+using webapi.common.infrastructure;
+using webapi.features.pizza.domain;
+using webapi.infrastructure;
 
 namespace webapi.features.ingredient.commands;
 
@@ -41,6 +44,11 @@ public class CreateIngredient : IFeatureModule
     [Injectable]
     public class Service : IService
     {
+        private readonly IAdd<Ingredient> _repository;
+        public Service(IAdd<Ingredient> repository)
+        {
+            _repository = repository;
+        }
         public Task<Response> Handler(Request request)
         {
             var response = new Response(
@@ -48,7 +56,23 @@ public class CreateIngredient : IFeatureModule
                 request.Name,
                 request.Cost
             );
+            
             return Task.FromResult(response);
+        }
+    }
+    [Injectable]
+    public class Repository : IAdd<Ingredient>
+    {
+        private readonly ApplicationDbContext _context;
+        public Repository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public Task AddAsync(Ingredient entity, CancellationToken cancellationToken = default)
+        {
+            _context.AddAsync(entity);
+            _context.SaveChangesAsync();
         }
     }
 }
