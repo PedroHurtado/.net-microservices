@@ -52,6 +52,7 @@ public class CreateIngredient : IFeatureModule
         public async Task<Response> Handler(Request request)
         {
             var ingredient = Ingredient.Create(Guid.NewGuid(), request.Name, request.Cost);
+            
             await _repository.AddAsync(ingredient);
 
             var response = new Response(ingredient.Id, ingredient.Name, ingredient.Cost);
