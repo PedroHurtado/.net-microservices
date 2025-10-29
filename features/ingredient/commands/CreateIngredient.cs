@@ -42,17 +42,14 @@ public class CreateIngredient : IFeatureModule
     }
 
     [Injectable]
-    public class Service : IService
+    public class Service(IAdd<Ingredient> repository) : IService
     {
-        private readonly IAdd<Ingredient> _repository;
-        public Service(IAdd<Ingredient> repository)
-        {
-            _repository = repository;
-        }
+        private readonly IAdd<Ingredient> _repository = repository;
+
         public async Task<Response> Handler(Request request)
         {
             var ingredient = Ingredient.Create(Guid.NewGuid(), request.Name, request.Cost);
-            
+
             await _repository.AddAsync(ingredient);
 
             var response = new Response(ingredient.Id, ingredient.Name, ingredient.Cost);
@@ -62,13 +59,9 @@ public class CreateIngredient : IFeatureModule
     }
     
     [Injectable]
-    public class Repository : IAdd<Ingredient>
+    public class Repository(ApplicationDbContext context) : IAdd<Ingredient>
     {
-        private readonly ApplicationDbContext _context;
-        public Repository(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
 
         public async Task AddAsync(Ingredient entity, CancellationToken cancellationToken = default)
         {
