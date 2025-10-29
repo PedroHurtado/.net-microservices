@@ -11,10 +11,7 @@ namespace webapi.features.ingredient.commands;
 
 public class GetIngredients : IFeatureModule
 {
-    public record struct Request(
-        [Required][property: Required] string Name,
-        [Required][property: Required] decimal Cost
-    );
+
     public record struct Response(
         [Required][property: Required] Guid Id,
         [Required][property: Required] string Name,
