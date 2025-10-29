@@ -11,12 +11,12 @@ public interface IGet<T, in ID>{
 
 public interface IUpdate<T, in ID> 
 {
-    Task UpdateAsync(ID id,T entity, CancellationToken cancellationToken = default);
+    void UpdateAsync(ID id,T entity, CancellationToken cancellationToken = default);
 }
 
 public interface IRemove<in ID> 
 {
-    Task RemoveAsync(ID id, CancellationToken cancellationToken = default);
+    void RemoveAsync(ID id, CancellationToken cancellationToken = default);
 }
 
 /*

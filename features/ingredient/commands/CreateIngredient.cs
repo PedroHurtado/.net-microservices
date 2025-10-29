@@ -33,7 +33,7 @@ public class CreateIngredient : IFeatureModule
         .WithDescription("Endpoint para crear un nuevo ingrediente con su nombre y costo")
         .WithTags("Ingredientes")
         .Produces<Response>(StatusCodes.Status200OK)
-        .ProducesProblem(StatusCodes.Status400BadRequest); // Opcional: para errores
+        .ProducesProblem(StatusCodes.Status400BadRequest);
     }
 
     public interface IService
@@ -49,17 +49,17 @@ public class CreateIngredient : IFeatureModule
         {
             _repository = repository;
         }
-        public Task<Response> Handler(Request request)
+        public async Task<Response> Handler(Request request)
         {
-            var response = new Response(
-                Guid.NewGuid(),
-                request.Name,
-                request.Cost
-            );
+            var ingredient = Ingredient.Create(Guid.NewGuid(), request.Name, request.Cost);
+            await _repository.AddAsync(ingredient);
+
+            var response = new Response(ingredient.Id, ingredient.Name, ingredient.Cost);
             
-            return Task.FromResult(response);
+            return response;
         }
     }
+    
     [Injectable]
     public class Repository : IAdd<Ingredient>
     {
@@ -69,10 +69,10 @@ public class CreateIngredient : IFeatureModule
             _context = context;
         }
 
-        public Task AddAsync(Ingredient entity, CancellationToken cancellationToken = default)
+        public async Task AddAsync(Ingredient entity, CancellationToken cancellationToken = default)
         {
-            _context.AddAsync(entity);
-            _context.SaveChangesAsync();
+            await _context.AddAsync(entity, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

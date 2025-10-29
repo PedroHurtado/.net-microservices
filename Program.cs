@@ -40,10 +40,13 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseInMemoryDatabase("PizzaDb");
+    
+
     if (builder.Environment.IsDevelopment())
     {
         options.EnableSensitiveDataLogging();
         options.EnableDetailedErrors();
+        options.LogTo(Console.WriteLine, LogLevel.Information);
     }
 });
 
