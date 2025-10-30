@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using webapi.common;
 using webapi.common.dependencyinjection;
 using System.ComponentModel.DataAnnotations;
-using webapi.common.infrastructure;
 using webapi.features.pizza.domain;
 using webapi.infrastructure;
 using Microsoft.EntityFrameworkCore;
