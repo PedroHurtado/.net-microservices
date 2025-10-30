@@ -56,7 +56,9 @@ public class RemoveIngredient : IFeatureModule
         public async Task RemoveAsync(Ingredient entity, CancellationToken cancellationToken = default)
         {
             //_context.Remove(entity);
-            _context.Entry(entity).State = EntityState.Deleted;
+            _context.Attach(entity);
+            _context.Remove(entity);
+            //_context.Entry(entity).State = EntityState.Deleted;
             //await _context.Ingredients.Where(i => i.Id.Equals(entity.Id)).ExecuteDeleteAsync(cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }
