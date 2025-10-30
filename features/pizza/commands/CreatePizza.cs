@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using webapi.common.infrastructure;
 using webapi.features.pizza.domain;
 using webapi.infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace webapi.features.pizza.commands;
 
@@ -93,7 +94,8 @@ public class CreatePizza : IFeatureModule
 
         public async Task AddAsync(Pizza entity, CancellationToken cancellationToken = default)
         {
-            await _context.AddAsync(entity, cancellationToken);
+            _context.Attach(entity);
+            _context.Entry(entity).State = EntityState.Added;            
             await _context.SaveChangesAsync(cancellationToken);
         }
     }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using webapi.common.openapi;
 using Microsoft.AspNetCore.Mvc;
+using webapi.common.infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.LogTo(Console.WriteLine, LogLevel.Information);
     }
 });
+
+builder.Services.AddScoped<IGetOrThrowAsync>(sp => sp.GetRequiredService<ApplicationDbContext>());
 
 
 builder.Services.AddProblemDetails(options =>
