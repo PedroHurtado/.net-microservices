@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using webapi.common;
 using webapi.common.dependencyinjection;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +9,7 @@ namespace webapi.features.ingredient.commands;
 
 public class GetIngredients : IFeatureModule
 {
-    public record Query(string? Name, int Page, int Size);
+    public record Query(string? Name, int Page=1, int Size=25);
 
     public record struct Response(
         [Required][property: Required] Guid Id,
