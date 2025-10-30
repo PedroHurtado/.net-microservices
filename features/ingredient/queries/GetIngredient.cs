@@ -58,7 +58,7 @@ public class GetIngredient : IFeatureModule
 
         public async Task<Ingredient> GetAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _context.GetOrThrowAsync<Ingredient, Guid>(id, cancellationToken);
+            return await _context.GetOrThrowAsync<Ingredient, Guid>(id, cancellationToken,false);
         }
     }
 }

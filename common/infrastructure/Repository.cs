@@ -1,3 +1,5 @@
+using webapi.common.domain;
+
 namespace webapi.common.infrastructure;
 
 public interface IAdd<in T>
@@ -23,6 +25,6 @@ public interface IRemove<T, in ID> : IGet<T, ID>
 public interface IGetOrThrowAsync
 {
     Task<T> GetOrThrowAsync<T, ID>(ID id,
-        CancellationToken cancellationToken = default) where T : class;
+        CancellationToken cancellationToken = default,bool tracking=true) where T : Entity;
 }
 
