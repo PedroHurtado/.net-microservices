@@ -90,6 +90,10 @@ public class Ingredient : Entity
     public string Name { get; protected set; } = string.Empty;
     public decimal Cost { get; protected set; }
 
+    public Ingredient(Guid id) : base(id)
+    {
+        
+    }
     protected Ingredient(Guid id, string name, decimal cost) : base(id)
     {
         ValidateAndSet(name, cost);
