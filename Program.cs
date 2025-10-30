@@ -95,13 +95,10 @@ builder.Services.AddProblemDetails(options =>
     };
 });
 
-
-
 builder.Services.AddInjectables();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
