@@ -93,9 +93,11 @@ public class CreatePizza : IFeatureModule
         private readonly ApplicationDbContext _context = context;
 
         public async Task AddAsync(Pizza entity, CancellationToken cancellationToken = default)
-        {
+        {            
             _context.Attach(entity);
-            _context.Entry(entity).State = EntityState.Added;            
+            _context.Entry(entity).State = EntityState.Added;        
+             //Marca todas las entidades relacionadas en estado Added 
+            //await _context.AddAsync(entity)   
             await _context.SaveChangesAsync(cancellationToken);
         }
     }
