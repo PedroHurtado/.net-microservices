@@ -5,13 +5,8 @@ using webapi.features.pizza.domain;
 namespace webapi.infrastructure;
 
 [Injectable]
-public class ApplicationDbContext : DbContext, IGetOrThrowAsync
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options), IGetOrThrowAsync
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-
     public DbSet<Pizza> Pizzas { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
 
