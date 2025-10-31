@@ -68,6 +68,16 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<GlobalErrorResponsesOperationFilter>();
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTodo", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -109,6 +119,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("PermitirTodo");
 
 app.UseExceptionHandler();
 app.UseStatusCodePages();
