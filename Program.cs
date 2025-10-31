@@ -97,7 +97,7 @@ builder.Services.AddProblemDetails(options =>
         context.ProblemDetails.Extensions["timestamp"] = DateTime.UtcNow;
     };
 });
-
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddInjectables();
 
 var app = builder.Build();
